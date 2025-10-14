@@ -14,6 +14,7 @@ img = cv2.imread(file_name)
 
 # Conver the image to grayscale
 gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+gray_img = cv2.equalizeHist(gray_img)
 
 # Detect the faces
 faces = haar_cascade.detectMultiScale(
@@ -24,6 +25,7 @@ i = 0
 for x, y, w, h in faces:
     # Crop image to select only face
     cropped_img = img[y : y + h, x : x + w]
+    cropped_img = cv2.resize(cropped_img, (224,224)) 
 
     # Stores each detected face into stored-faces folder
     target_file_name = 'stored-faces/' + str(i) + '.jpg'
