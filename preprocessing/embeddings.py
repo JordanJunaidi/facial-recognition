@@ -17,8 +17,12 @@ conn = psycopg2.connect(
     port=os.getenv("DB_PORT")
 )
 
-for filename in os.listdir("stored-faces"):
-    img = Image.open("stored-faces/" + filename)
+cur = conn.cursor()
+cur.execute("TRUNCATE TABLE pictures RESTART IDENTITY;")
+conn.commit()
+
+for filename in os.listdir("preprocessing/stored-faces"):
+    img = Image.open("preprocessing/stored-faces/" + filename)
 
     ibed = imgbeddings()
 
@@ -28,3 +32,5 @@ for filename in os.listdir("stored-faces"):
     print(filename)
 
 conn.commit()
+cur.close()
+conn.close()

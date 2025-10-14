@@ -4,10 +4,11 @@ import cv2
 TEST_IMAGE = "avengerscast.jpg"
 
 # Load in Haar Cascade Frontal Face algorithm
-haar_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+haar_cascade = cv2.CascadeClassifier("preprocessing/haarcascade_frontalface_default.xml")
 
 # Path for test image
-file_name = f"imgs/{TEST_IMAGE}"
+# file_name = f"imgs/{TEST_IMAGE}"
+file_name = "preprocessing/imgs/avengerscast.jpg"
 
 # Read the image
 img = cv2.imread(file_name)
@@ -28,7 +29,7 @@ for x, y, w, h in faces:
     cropped_img = cv2.resize(cropped_img, (224,224)) 
 
     # Stores each detected face into stored-faces folder
-    target_file_name = 'stored-faces/' + str(i) + '.jpg'
+    target_file_name = 'preprocessing/stored-faces/' + str(i) + '.jpg'
     cv2.imwrite(
         target_file_name,
         cropped_img
